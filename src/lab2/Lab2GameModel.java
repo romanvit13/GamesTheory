@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.OptionalInt;
 
 class Lab2GameModel {
-
     private final int[][] strategies;
     private int[] rowStrSum;
     private int[] colStrSum;
@@ -24,12 +23,11 @@ class Lab2GameModel {
     }
 
     double[] calculatePrices() {
-
         double[] prices = new double[stepsAmount];
 
         for (int k = 1; k <= stepsAmount; k++) {
-            int i = getRandom(strategies.length);
-            int j = getRandom(strategies.length);
+            int i = utils.getRandom(strategies.length);
+            int j = utils.getRandom(strategies.length);
 
             rowStrSum = utils.sumArrays(strategies[i], rowStrSum);
             utils.printArray(rowStrSum, "Row str sum: ");
@@ -50,9 +48,5 @@ class Lab2GameModel {
         }
 
         return prices;
-    }
-
-    private int getRandom(int scope) {
-        return (int) (Math.random() * (scope - 1));
     }
 }

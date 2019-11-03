@@ -7,7 +7,6 @@ import org.knowm.xchart.XYChart;
 
 class Lab2Main {
     public static void main(String[] args) {
-
         int[][] strategies = new int[][]{
                 {2, 4, -1, 6},
                 {3, 5, 1, 2},

@@ -1,6 +1,6 @@
 package lab3;
 
-import utils.ChartUtils;
+import utils.XYChartUtils;
 
 public class Lab3Main {
     public static void main(String[] args) {
@@ -11,7 +11,7 @@ public class Lab3Main {
                 {1, 8}
         };
 
-        ChartUtils chartUtils = ChartUtils.INSTANCE;
+        XYChartUtils chartUtils = XYChartUtils.INSTANCE;
         chartUtils.buildChart();
         chartUtils.addChartSeries(strategies);
         chartUtils.displayChart();

@@ -7,7 +7,7 @@ import org.knowm.xchart.XYChartBuilder;
 import javax.swing.*;
 import java.awt.*;
 
-public enum ChartUtils {
+public enum XYChartUtils {
 
     INSTANCE;
 
@@ -19,7 +19,7 @@ public enum ChartUtils {
                 .height(500)
                 .title("Chart")
                 .xAxisTitle("X")
-                .yAxisTitle("y")
+                .yAxisTitle("Y")
                 .build();
     }
 
@@ -34,16 +34,14 @@ public enum ChartUtils {
         javax.swing.SwingUtilities.invokeLater(() -> {
 
             // Create and set up the window.
-            JFrame frame = new JFrame("Лабораторна робота №3");
-            frame.setLayout(new BorderLayout());
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            JFrame frame = new JFrame();
 
             // chart
             JPanel chartPanel = new XChartPanel<>(chart);
             frame.add(chartPanel, BorderLayout.CENTER);
 
             // label
-            JLabel label = new JLabel("Графоаналітичний метод роз'язку матричних ігор", SwingConstants.CENTER);
+            JLabel label = new JLabel("Graphic method for decisions in the Games Theory", SwingConstants.CENTER);
             frame.add(label, BorderLayout.SOUTH);
 
             // Display the window.

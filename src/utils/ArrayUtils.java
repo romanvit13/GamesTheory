@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.List;
+
 public enum ArrayUtils {
 
     INSTANCE;
@@ -55,6 +57,14 @@ public enum ArrayUtils {
         System.out.println("\n");
     }
 
+    public void printArray(List<Double> array, String header) {
+        System.out.println("\n" + header);
+        for (double value : array) {
+            System.out.print(value + " ");
+        }
+        System.out.println("\n");
+    }
+
     public void printMatrix(int[][] matrix, String header) {
         System.out.println("\n" + header);
         for (int[] ints : matrix) {
@@ -63,5 +73,9 @@ public enum ArrayUtils {
             }
             System.out.println();
         }
+    }
+
+    public int getRandom(int scope) {
+        return (int) (Math.random() * (scope - 1));
     }
 }

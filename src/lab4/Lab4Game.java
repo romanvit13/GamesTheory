@@ -3,33 +3,40 @@ package lab4;
 import java.util.*;
 
 class Lab4Game {
-    private Map<List<Integer>, Integer> incomes;
+    private static final String GENERAL_INCOME_KEY = "1,2,3";
+    private Map<String, Integer> incomes;
 
-    Lab4Game(Map<List<Integer>, Integer> incomes) {
+    Lab4Game(Map<String, Integer> incomes) {
         this.incomes = incomes;
     }
 
-    double findSimplifiedIncome(List<Integer> coalition) {
-        double income = incomes.get(coalition);
-        double generalIncome = incomes.get(Arrays.asList(1, 2, 3));
-        double incomeSum = 0;
-        for (Integer value : coalition) {
-            incomeSum += incomes.get(Collections.singletonList(value));
+    List<Double> findSimplifiedIncomes() {
+        List<Double> simplifiedIncomes = new ArrayList<>();
+        for (String key : incomes.keySet()) {
+            double income = incomes.get(key);
+            double generalIncome = incomes.get(GENERAL_INCOME_KEY);
+            double incomeSum = 0;
+            String[] coalitions = key.split(",");
+            for (String value : coalitions) {
+                incomeSum += incomes.get(value);
+            }
+            double generalIncomeSum = 0;
+            for (int i = 1; i <= 3; i++) {
+                generalIncomeSum += incomes.get(Integer.toString(i));
+            }
+            double simplifiedIncome = (income - incomeSum) / (generalIncome - generalIncomeSum);
+            simplifiedIncomes.add(simplifiedIncome);
         }
-        double generalIncomeSum = 0;
-        for (int i = 1; i <= 3; i++) {
-            generalIncomeSum += incomes.get(Collections.singletonList(i));
-        }
-        return (income - incomeSum) / (generalIncome - generalIncomeSum);
+        return simplifiedIncomes;
     }
 
     boolean superAdditiveCheck() {
         List<Integer> nums = Arrays.asList(1, 2, 3);
-        for (int i=0; i<nums.size(); i++) {
+        for (int i = 0; i < nums.size(); i++) {
             List<Integer> tempNums = new ArrayList<>(nums);
             tempNums.remove(i);
             int sum = tempNums.stream().reduce(0, Integer::sum);
-            int generalIncome = incomes.get(Arrays.asList(1, 2, 3));
+            int generalIncome = incomes.get(GENERAL_INCOME_KEY);
             if (nums.get(i) + sum > generalIncome)
                 return false;
         }
@@ -40,9 +47,9 @@ class Lab4Game {
     boolean significantCheck() {
         int sum = 0;
         for (int i = 1; i <= 3; i++) {
-            sum += incomes.get(Collections.singletonList(i));
+            sum += incomes.get(Integer.toString(i));
         }
-        int generalIncome = incomes.get(Arrays.asList(1, 2, 3));
+        int generalIncome = incomes.get(GENERAL_INCOME_KEY);
         return sum < generalIncome;
     }
 
@@ -56,17 +63,5 @@ class Lab4Game {
         }
 
         return true;
-    }
-
-    static List<List<Integer>> generateCoalitions() {
-        List<List<Integer>> coalitions = new ArrayList<>();
-        coalitions.add(Collections.singletonList(1));
-        coalitions.add(Collections.singletonList(2));
-        coalitions.add(Collections.singletonList(3));
-        coalitions.add(Arrays.asList(1, 2));
-        coalitions.add(Arrays.asList(1, 3));
-        coalitions.add(Arrays.asList(2, 3));
-        coalitions.add(Arrays.asList(1, 2, 3));
-        return coalitions;
     }
 }

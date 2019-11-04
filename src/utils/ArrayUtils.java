@@ -1,5 +1,6 @@
 package utils;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public enum ArrayUtils {
@@ -57,10 +58,11 @@ public enum ArrayUtils {
         System.out.println("\n");
     }
 
-    public void printArray(List<Double> array, String header) {
+    public void printArrayAndFormat(List<Double> array, String header) {
+        DecimalFormat df = new DecimalFormat("0.00");
         System.out.println("\n" + header);
         for (double value : array) {
-            System.out.print(value + " ");
+            System.out.print(df.format(value) + " ");
         }
         System.out.println("\n");
     }

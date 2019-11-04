@@ -14,7 +14,7 @@ class Lab4Game {
         List<Double> simplifiedIncomes = new ArrayList<>();
         for (String key : incomes.keySet()) {
             double income = incomes.get(key);
-            double generalIncome = incomes.get(GENERAL_INCOME_KEY);
+            double generalIncome = getGeneralIncome();
             double incomeSum = 0;
             String[] coalitions = key.split(",");
             for (String value : coalitions) {
@@ -36,7 +36,7 @@ class Lab4Game {
             List<Integer> tempNums = new ArrayList<>(nums);
             tempNums.remove(i);
             int sum = tempNums.stream().reduce(0, Integer::sum);
-            int generalIncome = incomes.get(GENERAL_INCOME_KEY);
+            int generalIncome = getGeneralIncome();
             if (nums.get(i) + sum > generalIncome)
                 return false;
         }
@@ -45,11 +45,8 @@ class Lab4Game {
     }
 
     boolean significantCheck() {
-        int sum = 0;
-        for (int i = 1; i <= 3; i++) {
-            sum += incomes.get(Integer.toString(i));
-        }
-        int generalIncome = incomes.get(GENERAL_INCOME_KEY);
+        int sum = findSum();
+        int generalIncome = getGeneralIncome();
         return sum < generalIncome;
     }
 
@@ -63,5 +60,35 @@ class Lab4Game {
         }
 
         return true;
+    }
+
+    List<Double> findVector(double k) {
+        List<Double> vector = new ArrayList<>();
+        int generalIncome = getGeneralIncome();
+        for (int i = 1; i <= 3; i++) {
+            double value = (generalIncome - findSum()) * k + incomes.get(Integer.toString(i));
+            vector.add(value);
+        }
+        return vector;
+    }
+
+    double findVectorSum(List<Double> vector) {
+        double sum = 0;
+        for (double val : vector) {
+            sum += val;
+        }
+        return sum;
+    }
+
+    private int findSum() {
+        int sum = 0;
+        for (int i = 1; i <= 3; i++) {
+            sum += incomes.get(Integer.toString(i));
+        }
+        return sum;
+    }
+
+    public int getGeneralIncome() {
+        return incomes.get(GENERAL_INCOME_KEY);
     }
 }

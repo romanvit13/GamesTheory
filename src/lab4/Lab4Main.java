@@ -24,5 +24,11 @@ public class Lab4Main {
         System.out.println("Is super additive: " + game.superAdditiveCheck());
         System.out.println("Is significant: " + game.significantCheck());
         System.out.println("Core is not empty: " + game.isCoreNotEmpty(simplifiedIncomes));
+
+        List<Double> vector = game.findVector(0.3);
+        arrayUtils.printArrayAndFormat(vector, "Vector: ");
+        double vectorSum = game.findVectorSum(vector);
+        System.out.println("Vector sum: " + vectorSum);
+        System.out.println("General income: " + game.getGeneralIncome());
     }
 }
